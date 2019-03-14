@@ -1,0 +1,118 @@
+.App {
+    width: 100%;
+}
+ul {
+    height: 100%;
+    display: flex;
+}
+li {
+    text-decoration: none;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    list-style: none;
+    color:#000000;
+}
+.list-menu {
+    width: 100px;
+    margin-right: 00px;
+    font-size: 18px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    /* padding-right:20px;
+    padding-left:20px; */
+    cursor: pointer;
+    justify-content: space-evenly;
+    transition: 0.5s;
+    transition-property: background-color;
+    position: relative;
+}
+.list-menu:last-child {
+    justify-content: center;
+}
+.list-menu:hover {
+    background-color:#fe4c50;
+    color:#ffffff;
+}
+.listProduct {
+    width:100%;
+    max-width: 1280px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin:0 auto;    
+    background-color:#ffffff;
+}
+
+.listItem {
+    width:calc(100% - 1px);
+    justify-self: center;
+    margin-bottom:40px;
+    background-color:#ffffff;
+    border-right: 1px solid #ddd;
+
+}
+.listItem-content {
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 20px;
+    justify-items: center;
+    cursor: pointer;
+}   
+.listItem-content:hover .buyGroup {
+    visibility: visible;
+}
+.listItem-content:hover {
+    box-shadow:  0px 8px 14px 5px #ddd
+   
+}
+.buyGroup {
+    width:100%;
+    visibility: hidden;
+    margin: 0 auto;
+}
+.listItem-img {
+    width: 60%;
+}
+.btn-addProduct {
+    width: 100%;
+    background-color:#fe4c50;
+    color:white;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s;
+    transition-property: background-color,color; 
+}
+.btn-addProduct:hover {
+    background:none;
+    background-color:#fd8487;
+    cursor: pointer;
+}
+.price-txt {
+    color:#fe4c50;
+    font-weight: bold;
+    font-size: 16px;
+}
+header {
+    height: 60px;
+    background-color:#ffffff;
+    box-shadow: 2px 2px 5px #ddd;
+    position: sticky;
+    top:0;
+    display: grid;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left:20px;
+    padding-right:20px;
+    margin-bottom:40px;
+}
+.fa-shopping-cart {
+    padding-right: 10px;
+}
