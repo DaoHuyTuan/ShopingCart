@@ -10,7 +10,7 @@ class ProductDetail extends React.Component {
     componentDidMount() {
         const detailID = this.props.match.params.id;
         const query = 'query productsByID {product(productId:' + '"' + detailID + '"' + ') { id name description rating price images { url alt } } }';
-        fetch('https://nordic-shop-api.herokuapp.com/', {
+        fetch('https://graph-api-shopingcart.herokuapp.com/', {
             credentials: 'omit',
             headers: {
                 accept: '*/*',

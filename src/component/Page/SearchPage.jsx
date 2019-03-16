@@ -1,32 +1,17 @@
 import React from "react";
-import Product from "./product";
 import { connect } from "react-redux";
-import { timingSafeEqual } from "crypto";
-class ListItem extends React.Component {
-    constructor(props) {
+import Product from "../product";
+class SearchPage extends React.Component {
+    constructor(props){
         super(props);
-       
         this.state = {
-            arrayData: '',
-            arrayCart: [],
-            numCart:0,
+            arrayDataSearch:[]
         }
     }
-
     componentDidMount() {
-        const query = `query products {
-          products {
-            id
-            name
-            description
-            rating
-            price
-            images {
-              url
-              alt
-            }
-          }
-        }`;
+        const productName = this.props.match.params.name;
+        console.log(productName)
+        const query = 'query AllproductsByName {products(productName:' +'"' + productName + '"'+ ') { id name description rating price images { url alt } } }';
 
         fetch('https://graph-api-shopingcart.herokuapp.com/', {
             credentials: 'omit',
@@ -43,15 +28,14 @@ class ListItem extends React.Component {
             mode: 'cors',
         })
         .then((res) => res.json())
-        .then((arrData) =>
+        .then((arrDataSearch) =>
             this.setState({
-                arrayData: arrData.data.products
+                arrayDataSearch: arrDataSearch.data.products
             }),
         )
     }
-
     render() {
-        const arData = this.state.arrayData;
+        const arData = this.state.arrayDataSearch;
         let datas;
         datas = Object.keys(arData).map(function (key, index) {
             return (
@@ -65,12 +49,11 @@ class ListItem extends React.Component {
                     btnAddToCart={this.props.addToCart}
                 />
             )
+
         }.bind(this))
         return (
-            <div>
-                <div className="listProduct" >
-                    {datas}
-                </div>
+            <div className="listProduct" >
+                {datas}
             </div>
         )
     }
@@ -92,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
         })
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ListItem);
+export default connect(mapStateToProps,mapDispatchToProps)(SearchPage);

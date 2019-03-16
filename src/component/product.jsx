@@ -31,13 +31,13 @@ class Product extends React.Component {
         return (
             <div className="listItem" key={this.id} >
                 <div className="listItem-content" >
-                <Link to={pathRoute}>
-                    <div className="item_area" >
-                        <img className="listItem-img" src={this.image}></img>
-                        <span>{this.name}</span>
-                        <span className="price-txt">Price: ${this.price}</span>
-                    </div>
-                </Link>
+                    <Link to={pathRoute}>
+                        <div className="item_area" >
+                            <img className="listItem-img" src={this.image}></img>
+                            <span>{this.name}</span>
+                            <span className="price-txt">Price: ${this.price}</span>
+                        </div>
+                    </Link>
                     <div className="buyGroup">
                         {button}
                     </div>
