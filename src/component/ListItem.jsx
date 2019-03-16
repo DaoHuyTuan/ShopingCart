@@ -52,9 +52,9 @@ class ListItem extends React.Component {
    
         const arData = this.state.arrayData;
         let datas = Object.keys(arData).map(function (key, index) {
-            const pathRoute = "/product/" + arData[index].id;
+            
             return (
-                <Link to={pathRoute}  key={arData[index].id}>
+                
                 <Product
                     type="productlist"
                     key={arData[index].id}
@@ -63,7 +63,7 @@ class ListItem extends React.Component {
                     productImage={arData[index].images[0].url}
                     productPrice={arData[index].price}
                     btnAddToCart={this.props.addToCart}
-                /></Link>
+                />
             )
         }.bind(this))
         return (

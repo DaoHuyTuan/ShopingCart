@@ -21,8 +21,6 @@ const reducer = (state = initState, action) => {
     if(action.type == "VIEW_DETAIL") {
         newState.detailPageID = action.detailPageID
         console.log(newState.detailPageID);
-        console.log(action.events)
-        // action.events.stopPropagation();
     }
     return newState;
 }
