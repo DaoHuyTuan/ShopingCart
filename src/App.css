@@ -40,7 +40,7 @@ a {
     width:100%;
     max-width: 1280px;
     display: grid;
-    grid-template-columns: repeat(3, 255px);
+    grid-template-columns: repeat(3, 1fr);
     margin:0 auto;    
     background-color:#ffffff;
 }
