@@ -3,23 +3,30 @@ class SlideImage extends React.Component {
     constructor(props) {
         super(props);
         this.bundleImage = {}
-        
+        this.changeBigImage = this.changeBigImage.bind(this);
+        this.state = {
+            biggestImage: ""
+        }
     }
-    componentDidMount() {
-        
-    }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
-        this.bundleImage = nextProps.bundleImage;
-       
+        this.bundleImage = nextProps.bundleImage;  
+        this.setState({
+            biggestImage:<img className="bigImg" src={this.bundleImage[0].url} alt={this.bundleImage[0].url}/>
+        })
+    }
+    changeBigImage = (url) => {
+        console.log(url)
+        this.setState({
+            biggestImage: <img className="bigImg" src={url} alt={url}/>
+        })
+
     }
     render() {
-        let biggestImage;  
         let datas = Object.keys(this.bundleImage).map(function (key, index) {
-            biggestImage =  (
-                <img className="bigImg" src={this.bundleImage[0].url} alt={this.bundleImage[0].alt}/>
-            )
+           
                 return (
-                    <div className="thumbnail-item" key={key}>
+                    <div className="thumbnail-item" key={key} onClick={this.changeBigImage.bind(this,this.bundleImage[index].url)}>
                         <img className="thumbnail" src={this.bundleImage[index].url} alt={this.bundleImage[index].alt}/>
                     </div>
                 )    
@@ -30,7 +37,7 @@ class SlideImage extends React.Component {
                     {datas}
                 </div>
                 <div className="slideImage-bigImg">
-                    {biggestImage}
+                    {this.state.biggestImage}
                 </div>
             </div>
         )   
