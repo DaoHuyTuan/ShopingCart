@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from "./component/headers";
 import { BrowserRouter, Route,Switch} from "react-router-dom";
-import Cart from "./component/Cart.jsx";
+import Cart from "./component/cart";
 import ListItem from './component/ListItem';
 import ProductDetail from "./component/Page/ProductDetail";
 export default class App extends Component {
