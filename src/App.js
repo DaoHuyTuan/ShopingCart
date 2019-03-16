@@ -5,7 +5,7 @@ import { BrowserRouter, Route,Switch} from "react-router-dom";
 import Cart from "./component/Cart";
 import ListItem from './component/ListItem';
 import ProductDetail from "./component/Page/ProductDetail";
-class App extends Component {
+export default class App extends Component {
 
   render() {
 
@@ -24,4 +24,3 @@ class App extends Component {
   }
 }
 
-export default App;

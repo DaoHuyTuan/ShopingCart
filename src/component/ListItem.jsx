@@ -1,7 +1,6 @@
 import React from "react";
 import Product from "./product";
 import { connect } from "react-redux";
-import {Link} from "react-router-dom";
 class ListItem extends React.Component {
     constructor(props) {
         super(props);
