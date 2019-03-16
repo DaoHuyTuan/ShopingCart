@@ -1,13 +1,14 @@
 const initState = {
     arrayCart: [],
     numCart:0,
-    product:{}
+    product:{},
+    detailPageID:""
 }
 const reducer = (state = initState, action) => {
     let newState = {...state};
     if(action.type === "ADD_TO_CART") {
         newState.numCart++;
-        console.log(action.ProductPrice)
+       
         newState.product = {
             id:action.ProductID,
             name:action.ProductName,
@@ -16,6 +17,12 @@ const reducer = (state = initState, action) => {
         }
         newState.arrayCart.push(newState.product);
         console.log(newState)
+    }
+    if(action.type == "VIEW_DETAIL") {
+        newState.detailPageID = action.detailPageID
+        console.log(newState.detailPageID);
+        console.log(action.events)
+        // action.events.stopPropagation();
     }
     return newState;
 }
