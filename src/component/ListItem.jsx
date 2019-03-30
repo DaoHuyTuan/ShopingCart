@@ -1,95 +1,71 @@
 import React from "react";
 import Product from "./product";
 import { connect } from "react-redux";
-import { timingSafeEqual } from "crypto";
+import * as actionCreator from "./store/action/action"
 class ListItem extends React.Component {
     constructor(props) {
         super(props);
-       
-        this.state = {
-            arrayData: '',
-            arrayCart: [],
-            numCart:0,
-        }
+        this.query = `query products {
+            products {
+              id
+              name
+              description
+              rating
+              price
+              images {
+                url
+                alt
+              }
+            }
+          }`;
     }
 
     componentDidMount() {
-        const query = `query products {
-          products {
-            id
-            name
-            description
-            rating
-            price
-            images {
-              url
-              alt
-            }
-          }
-        }`;
+        this.props.onfetchData('https://graph-api-shopingcart.herokuapp.com/',this.query)
 
-        fetch('https://graph-api-shopingcart.herokuapp.com/', {
-            credentials: 'omit',
-            headers: {
-                accept: '*/*',
-                'accept-language': 'en-US,en;q=0.9',
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                variables: {},
-                query: query,
-            }),
-            method: 'POST',
-            mode: 'cors',
-        })
-        .then((res) => res.json())
-        .then((arrData) =>
-            this.setState({
-                arrayData: arrData.data.products
-            }),
-        )
     }
-
     render() {
-        const arData = this.state.arrayData;
-        let datas;
-        datas = Object.keys(arData).map(function (key, index) {
-            return (
-                <Product
-                    type="productlist"
-                    key={arData[index].id}
-                    productID={arData[index].id}
-                    productName={arData[index].name}
-                    productImage={arData[index].images[0].url}
-                    productPrice={arData[index].price}
-                    btnAddToCart={this.props.addToCart}
-                />
-            )
-        }.bind(this))
+
+        const arData = this.props.products;
+        const arrayCart = this.props.productQuality
+        let thisQuality;
+        const onCheckQuality = (id,quality) => {
+            this.props.onCheckQuality(id,quality)
+        }
         return (
             <div>
                 <div className="listProduct" >
-                    {datas}
+           
+                    {Object.keys(arData).map(function (key, index) { 
+                        return (
+                            <Product
+                                type="productlist"
+                                key={arData[index].id}
+                                productID={arData[index].id}
+                                productName={arData[index].name}
+                                productImage={arData[index].images[0].url}
+                                productPrice={arData[index].price}
+                                btnAddToCart={(id,quality) => onCheckQuality(id,quality)}
+                                producQuality={thisQuality}
+                            />
+                        )
+                    })}
                 </div>
             </div>
         )
     }
 }
 const mapStateToProps = (state) => {
+    
     return {
-        arrayCart: state.arrayCart,
-        numCart:state.numCart
+        products: state.productRD.products,
+        productQuality: state.cartRD.cartList,
     }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (id,name,image,price) => dispatch
-        ({type:"ADD_TO_CART",
-                ProductID:id,
-                ProductName:name,
-                ProductImage:image,
-                ProductPrice:price
-        })
+        onfetchData: (url,query) => dispatch(actionCreator.fetchData(url,query)),
+        onCheckQuality: (idProduct,quality) => dispatch(actionCreator.checkQuality(idProduct,quality))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ListItem);

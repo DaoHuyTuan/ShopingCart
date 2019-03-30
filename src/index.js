@@ -3,10 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from "redux";
+import { createStore,applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./component/store/reducer";
-const store = createStore(reducer);
+//plugin
+import thunk from "redux-thunk";
+import logger from "redux-logger"
+
+//reducer 
+import productReducer  from "./component/store/reducer/reducer";
+import cartReducer from "./component/store/reducer/reducer-cart";
+
+const rootReducer = combineReducers({
+    productRD:productReducer,
+    cartRD:cartReducer
+})
+const store = createStore(rootReducer,applyMiddleware(thunk,logger));
 ReactDOM.render( <Provider store={store} ><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

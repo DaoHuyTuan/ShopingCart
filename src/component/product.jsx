@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 class Product extends React.Component {
     constructor(props) {
@@ -8,10 +8,12 @@ class Product extends React.Component {
         this.name = this.props.productName
         this.image = this.props.productImage
         this.price = this.props.productPrice
+        this.quality = this.props.producQuality
     }
     render() {
         let type = this.props.type;
         let button;
+       
         const pathRoute = "/product/" + this.id;
         if (type == "cart") {
             button = null;
@@ -20,9 +22,6 @@ class Product extends React.Component {
             button = (
                 <button className="btn-addProduct" onClick={this.props.btnAddToCart.bind(this,
                     this.id,
-                    this.name,
-                    this.image,
-                    this.price,
                 )}>Add To Cart
                 </button>
             );
@@ -41,6 +40,7 @@ class Product extends React.Component {
                     <div className="buyGroup">
                         {button}
                     </div>
+                    <span>{this.quality}</span>
                 </div>
 
             </div>
